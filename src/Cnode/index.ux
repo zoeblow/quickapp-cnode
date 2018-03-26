@@ -1,0 +1,135 @@
+<template>
+  <div class="cnode-page">
+    <image src="../Common/cnode1.png" ></image>
+    <div class='title'>
+      <text>{{title}}</text>  
+    </div>
+    <div for="{{CnodeList}}" class="list">
+      <div class="item" @click="goToWeb($item.id)" >
+        <img src="{{$item.author.avatar_url}}" alt="{{$item.author.loginname}}">
+        <div class="topic_title_wrapper">
+          <text class='textss'><a class="topic_title" href="https://cnodejs.org/topic/5ab8b79052d7d3a8698a47fe" ><span>{{$item.title}}</span> </a></text>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style >
+  .cnode-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .cnode-page image{
+    width: 50%;
+  }
+  .title{
+    position: relative;
+    background-color: #444;
+    padding:50px 15px;
+  }
+  .title text{
+    margin: 0 auto;
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+  }
+  .list{
+    padding: 10px 0px;
+  }
+  .list .item{
+    width: 100%;
+    /* background-color: #ffd100; */
+    border-bottom-width: 1;
+    border-bottom-color: #ccc;
+    border-style:solid;
+    color: #000000;
+    padding:10px 5px;
+  }
+  .item image{
+    width:60px;
+    height: 60px;
+    margin:0 10px; 
+    border-radius: 6px;
+  }
+  .item .topic_title_wrapper {
+    max-width: 70%;
+    vertical-align: middle;
+    font-size: 30px;
+    line-height: 50px;
+  }
+  .item .textss{
+    lines:1;
+    text-overflow:ellipsis
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+  import fetch from '@system.fetch';
+  export default {
+    data: {
+      title: 'Cnode',
+      // 生命周期的文本列表
+      jokeList: [],
+      CnodeList:[]
+    },
+    onInit() {
+      // this.$page.setTitleBar({ text: 'list-item懒加载' })
+      //this.getList();
+      console.info(`触发：onInit`)
+      
+    },
+    goToWeb(urlString) {
+      router.push({
+        uri: '/CnodeDetail',
+        params: {
+          url: urlString
+        }
+      })
+    },
+    onReady() {
+      var _this = this;
+      fetch.fetch({
+        url: 'https://cnodejs.org/api/v1/topics',
+        method: 'get',
+        success(res) {
+          var cn = JSON.parse(res.data);
+          console.log(cn)
+          if (cn.success == true) {
+            console.log("状态成功")
+            var cnode = cn.data;
+            _this.CnodeList= cnode
+            // for (var item in cnode) {
+            //   _this.CnodeList.push(cnode[item].title)
+            // }
+          }
+        },
+        fail() {
+          console.log("失败")
+        }
+      })
+
+      // fetch.fetch({
+      //   url: 'https://weixin.licoy.cn/duanzi.php?t=joke&token=s97UXAa3XOAAvw1KN8ORlcXZNsqeEO4P',
+      //   method: 'get',
+      //   success(res) {
+      //     var d = JSON.parse(res.data);
+      //     console.log(d)
+      //     if (d.code == "200") {
+      //       console.log("状态成功")
+      //       var dd = d.data;
+      //       for (var item in dd) {
+      //         _this.jokeList.push(dd[item].group.content)
+      //       }
+      //     }
+      //   },
+      //   fail() {
+      //     console.log("失败")
+      //   }
+      // })
+    }
+  }
+</script>
