@@ -14,8 +14,8 @@
 
 3、由于快应用的image标签只支持png, jpg和gif，所以有些连接图片无法显示
 
-首页
+### 首页
 ![cnode-index.png](./src/Common/cnode-index.png)
 
-详情页
+### 详情页
 ![cnode-detail.png](./src/Common/cnode-detail.png)
