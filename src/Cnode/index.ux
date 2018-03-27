@@ -1,14 +1,16 @@
 <template>
   <div class="cnode-page">
-    <image src="../Common/cnode1.png" ></image>
-    <div class='title'>
-      <text>{{title}}</text>  
-    </div>
+    <image src="../Common/cnode.png" ></image>
+    <div class='titleline'></div>
     <div for="{{CnodeList}}" class="list">
       <div class="item" @click="goToWeb($item.id)" >
         <img src="{{$item.author.avatar_url}}" alt="{{$item.author.loginname}}">
+        <text class="zhiding" if="{{$item.top}}">置顶</text>
+        <text class="types" if="{{$item.tab === 'share' && !$item.top}}">分享</text>
+        <text class="types" elif="{{$item.tab === 'ask' && !$item.top}}">问答</text>
+        <text class="types" elif="{{$item.tab === 'job' && !$item.top}}">工作</text>
         <div class="topic_title_wrapper">
-          <text class='textss'><a class="topic_title" href="https://cnodejs.org/topic/5ab8b79052d7d3a8698a47fe" ><span>{{$item.title}}</span> </a></text>
+          <text class='textss'><a class="topic_title" ><span>{{$item.title}}</span> </a></text>
         </div>
       </div>
     </div>
@@ -24,17 +26,10 @@
   .cnode-page image{
     width: 50%;
   }
-  .title{
-    position: relative;
-    background-color: #444;
-    padding:50px 15px;
-  }
-  .title text{
-    margin: 0 auto;
-    font-size: 50px;
+  .titleline{
+    background-color: #444444;
     width: 100%;
-    text-align: center;
-    color: #ffffff;
+    height: 5px;
   }
   .list{
     padding: 10px 0px;
@@ -42,8 +37,8 @@
   .list .item{
     width: 100%;
     /* background-color: #ffd100; */
-    border-bottom-width: 1;
-    border-bottom-color: #ccc;
+    border-bottom-width: 1px;
+    border-bottom-color: #cccccc;
     border-style:solid;
     color: #000000;
     padding:10px 5px;
@@ -54,11 +49,28 @@
     margin:0 10px; 
     border-radius: 6px;
   }
+  .zhiding{
+    background-color: #80bd01;
+    padding: 2px 4px;
+    width: 55px;
+    text-align: center;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 20px;
+  }
+  .types{
+    background-color: #e5e5e5;
+    color: #999999;
+    width: 55px;
+    text-align: center;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 20px;
+  }
   .item .topic_title_wrapper {
-    max-width: 70%;
-    vertical-align: middle;
     font-size: 30px;
     line-height: 50px;
+    padding-left: 10px;
   }
   .item .textss{
     lines:1;

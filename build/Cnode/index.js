@@ -80,22 +80,14 @@
 	    {
 	      "type": "image",
 	      "attr": {
-	        "src": "../Common/cnode1.png"
+	        "src": "../Common/cnode.png"
 	      }
 	    },
 	    {
 	      "type": "div",
 	      "attr": {},
 	      "classList": [
-	        "title"
-	      ],
-	      "children": [
-	        {
-	          "type": "text",
-	          "attr": {
-	            "value": function () {return this.title}
-	          }
-	        }
+	        "titleline"
 	      ]
 	    },
 	    {
@@ -124,6 +116,46 @@
 	              }
 	            },
 	            {
+	              "type": "text",
+	              "attr": {
+	                "value": "置顶"
+	              },
+	              "classList": [
+	                "zhiding"
+	              ],
+	              "shown": function () {return this.$item.top}
+	            },
+	            {
+	              "type": "text",
+	              "attr": {
+	                "value": "分享"
+	              },
+	              "classList": [
+	                "types"
+	              ],
+	              "shown": function () {return this.$item.tab==='share'&&!this.$item.top}
+	            },
+	            {
+	              "type": "text",
+	              "attr": {
+	                "value": "问答"
+	              },
+	              "classList": [
+	                "types"
+	              ],
+	              "shown": function () {return (this.$item.tab==='ask'&&!this.$item.top)&&!(this.$item.tab==='share'&&!this.$item.top)}
+	            },
+	            {
+	              "type": "text",
+	              "attr": {
+	                "value": "工作"
+	              },
+	              "classList": [
+	                "types"
+	              ],
+	              "shown": function () {return (this.$item.tab==='job'&&!this.$item.top)&&!(this.$item.tab==='share'&&!this.$item.top)&&!(this.$item.tab==='ask'&&!this.$item.top)}
+	            },
+	            {
 	              "type": "div",
 	              "attr": {},
 	              "classList": [
@@ -139,9 +171,7 @@
 	                  "children": [
 	                    {
 	                      "type": "a",
-	                      "attr": {
-	                        "href": "https://cnodejs.org/topic/5ab8b79052d7d3a8698a47fe"
-	                      },
+	                      "attr": {},
 	                      "classList": [
 	                        "topic_title"
 	                      ],
@@ -196,36 +226,10 @@
 	      ]
 	    }
 	  },
-	  ".title": {
+	  ".titleline": {
 	    "backgroundColor": "#444444",
-	    "paddingTop": "50px",
-	    "paddingRight": "15px",
-	    "paddingBottom": "50px",
-	    "paddingLeft": "15px"
-	  },
-	  ".title text": {
-	    "fontSize": "50px",
 	    "width": "100%",
-	    "textAlign": "center",
-	    "color": "#ffffff",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "title"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "t",
-	          "n": "text"
-	        }
-	      ]
-	    }
+	    "height": "5px"
 	  },
 	  ".list": {
 	    "paddingTop": "10px",
@@ -292,11 +296,34 @@
 	      ]
 	    }
 	  },
+	  ".zhiding": {
+	    "backgroundColor": "#80bd01",
+	    "paddingTop": "2px",
+	    "paddingRight": "4px",
+	    "paddingBottom": "2px",
+	    "paddingLeft": "4px",
+	    "width": "55px",
+	    "textAlign": "center",
+	    "borderRadius": "3px",
+	    "color": "#ffffff",
+	    "fontSize": "20px"
+	  },
+	  ".types": {
+	    "backgroundColor": "#e5e5e5",
+	    "color": "#999999",
+	    "width": "55px",
+	    "textAlign": "center",
+	    "paddingTop": "2px",
+	    "paddingRight": "4px",
+	    "paddingBottom": "2px",
+	    "paddingLeft": "4px",
+	    "borderRadius": "3px",
+	    "fontSize": "20px"
+	  },
 	  ".item .topic_title_wrapper": {
-	    "maxWidth": "70%",
-	    "verticalAlign": "middle",
 	    "fontSize": "30px",
 	    "lineHeight": "50px",
+	    "paddingLeft": "10px",
 	    "_meta": {
 	      "ruleDef": [
 	        {

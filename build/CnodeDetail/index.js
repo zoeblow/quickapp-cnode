@@ -83,7 +83,7 @@
 	    {
 	      "type": "image",
 	      "attr": {
-	        "src": "../Common/logo.png"
+	        "src": "../Common/cnode.png"
 	      }
 	    },
 	    {
@@ -96,12 +96,42 @@
 	      ]
 	    },
 	    {
-	      "type": "text",
+	      "type": "div",
+	      "attr": {},
+	      "children": [
+	        {
+	          "type": "text",
+	          "attr": {
+	            "value": function () {return '作者：' + (this.author.loginname) + ' | ' + (this.article.visit_count) + '次浏览'}
+	          },
+	          "classList": [
+	            "author"
+	          ]
+	        }
+	      ]
+	    },
+	    {
+	      "type": "div",
+	      "attr": {},
+	      "classList": [
+	        "titleline"
+	      ]
+	    },
+	    {
+	      "type": "richtext",
 	      "attr": {
+	        "type": "html",
 	        "value": function () {return this.article.content}
 	      },
 	      "classList": [
 	        "content"
+	      ]
+	    },
+	    {
+	      "type": "div",
+	      "attr": {},
+	      "classList": [
+	        "titleline"
 	      ]
 	    },
 	    {
@@ -131,8 +161,48 @@
 	    "alignItems": "center"
 	  },
 	  ".title": {
-	    "fontSize": "40px",
-	    "textAlign": "center"
+	    "fontSize": "50px",
+	    "paddingTop": "10px",
+	    "paddingRight": "50px",
+	    "paddingBottom": "10px",
+	    "paddingLeft": "50px"
+	  },
+	  ".titleline": {
+	    "backgroundColor": "#444444",
+	    "width": "100%",
+	    "height": "5px",
+	    "marginTop": "20px",
+	    "marginRight": "0px",
+	    "marginBottom": "20px",
+	    "marginLeft": "0px"
+	  },
+	  ".content": {
+	    "width": "100%",
+	    "marginTop": "10px",
+	    "marginRight": "50px",
+	    "marginBottom": "10px",
+	    "marginLeft": "50px"
+	  },
+	  ".content img": {
+	    "width": "80%",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "content"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "t",
+	          "n": "img"
+	        }
+	      ]
+	    }
 	  },
 	  ".btn": {
 	    "width": "550px",
@@ -141,6 +211,7 @@
 	    "borderRadius": "43px",
 	    "backgroundColor": "#09ba07",
 	    "fontSize": "30px",
+	    "marginBottom": "10px",
 	    "color": "#ffffff"
 	  }
 	}
@@ -171,6 +242,7 @@
 	  data: {
 	    title: '详情页面',
 	    article: '',
+	    author: '',
 	    pages: ''
 	  },
 	  routeCnode: function routeCnode() {
@@ -193,6 +265,8 @@
 	          console.log("状态成功");
 	          var cnode = cn.data;
 	          _this.article = cnode;
+	          _this.author = cnode.author;
+	          _this.$page.setTitleBar({ text: cnode.title });
 	        }
 	      },
 	      fail: function fail() {

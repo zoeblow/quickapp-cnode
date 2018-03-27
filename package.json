@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "subversion": {
     "toolkit": "0.0.26",
     "packager": "0.0.5"

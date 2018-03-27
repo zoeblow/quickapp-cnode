@@ -1,9 +1,15 @@
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="demo-page">
-    <img src='../Common/logo.png' />
+    <image src="../Common/cnode.png"></image>
     <text class="title">{{article.title}}</text>
-    <text class="content">{{article.content}}</text>
+    <div>
+      <text class='author'> 作者：{{author.loginname}} | {{article.visit_count}}次浏览</text>
+    </div>
+    <div class='titleline'></div>
+    <!-- <text class="content">{{article.content}}</text> -->
+    <richtext class="content" type='html'>{{article.content}}</richtext>
+    <div class='titleline'></div>
     <!-- 点击跳转详情页 -->
     <input class="btn" type="button" value="跳转到Cnode" onclick="routeCnode">
   </div>
@@ -17,8 +23,21 @@
   }
 
   .title {
-    font-size: 40px;
-    text-align: center;
+    font-size: 50px;
+    padding:10px 50px;
+  }
+  .titleline{
+    background-color: #444444;
+    width: 100%;
+    height: 5px;
+    margin: 20px 0px
+  }
+  .content{
+    width: 100%;
+    margin:10px 50px;
+  }
+  .content img{
+    width: 80%;
   }
 
   .btn {
@@ -28,6 +47,7 @@
     border-radius: 43px;
     background-color: #09ba07;
     font-size: 30px;
+    margin-bottom: 10px;
     color: #ffffff;
   }
 </style>
@@ -39,6 +59,7 @@
     data: {
       title: '详情页面',
       article:'',
+      author:'',
       pages:''
     },
     routeCnode() {
@@ -61,6 +82,8 @@
             console.log("状态成功")
             var cnode = cn.data;
             _this.article = cnode
+            _this.author = cnode.author;
+            _this.$page.setTitleBar({ text: cnode.title })
             // for (var item in cnode) {
             //   _this.CnodeList.push(cnode[item].title)
             // }
